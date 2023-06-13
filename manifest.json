@@ -1,7 +1,7 @@
 {
 
   "manifest_version": 2,
-  "name": "qr-page",
+  "name": "QR Cat",
   "description": "Displays the qr code of current page",
   "version": "1.0",
   "browser_specific_settings": {
@@ -11,11 +11,23 @@
   },
   "browser_action": {
     "default_icon": {
-      "16": "icons/qr-16.png",
-      "32": "icons/qr-32.png"
+      "16": "public/icons/qr-16.png",
+      "32": "public/icons/qr-32.png"
     },
     "default_title" : "Scan QR Code",
-    "default_popup": "public/index.html"
+    "default_popup": "public/index.html",
+    "theme_icons": [
+      {
+        "light": "icons/qr-16-light.png",
+        "dark": "icons/qr-16.png",
+        "size": 16
+      },
+      {
+        "light": "icons/qr-32-light.png",
+        "dark": "icons/qr-32.png",
+        "size": 32
+      }
+    ]
   },
   "permissions": ["tabs", "storage"],
   "commands": {

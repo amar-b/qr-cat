@@ -1,62 +1,58 @@
 <script>
   import { onMount } from 'svelte';
-  import { default as QrCode } from 'qrious';
+	import QRCode from 'qrcode'
 
-  const QRcode = new QrCode();
-  let image = '';
 	let value = '';
 
   function render(url) {
 		value = url;
-    QRcode.set({
-      background: "#fff",
-      foreground: "#000",
-			padding: 0,
-      size: 200,
-      value,
-    });
-    image = QRcode.toDataURL('image/jpeg');
+		QRCode.toCanvas(document.getElementById('canvas'), url, {
+			errorCorrectionLevel: 'H',
+			width: 200,
+			margin: 0,
+			color: {
+				dark:"#000000",
+				light:"#ffffff"
+			}
+		});
   }
   
   onMount(() => {
 		if (typeof browser !== "undefined") {
 			browser.tabs.query({currentWindow: true, active: true})
-				.then((tabs) => {
-					render(tabs[0].url);
-				})
+				.then((tabs) => render(tabs[0].url))
 		}
 		else {
 			render(window.location.href)
 		}
-		document.getElementById("url").focus()
+		document.getElementById("url").focus();
 	});
 </script>
 
 <main>
-	<img src={image} alt={value} id="qr"/>
+	<canvas id="canvas"></canvas>
 	<input readonly value={value} id="url">
 </main>
 
 <style>
 	main {
 		text-align: center;
-		max-width: 200px;
+		width: 200px;
 		margin: 0 auto;
 	}
 
-	#qr, #url{
-		width: 100%;
+	#canvas, #url{
+		min-width: 100%;
 	}
 
 	#url {
 		font-family: inherit;
 		font-size: 0.7em;
 		-webkit-padding: 0.2em 0;
-		padding: 0.2em;
+		padding: 0;
+		margin: 0;
 		box-sizing: border-box;
 		border: 1px solid #ccc;
 		border-radius: 2px;
 	}
-
-
 </style>
