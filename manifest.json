@@ -1,11 +1,12 @@
 {
-
-  "manifest_version": 2,
   "name": "QR Cat",
+  "author": "amar-b",
+  "manifest_version": 2,
   "description": "Displays the qr code of current page",
   "version": "1.0",
   "browser_specific_settings": {
     "gecko": {
+      "id": "qr-cat@amar-b",
       "strict_min_version": "54.0a1"
     }
   },
@@ -18,7 +19,7 @@
     "default_title" : "Scan QR Code",
     "default_popup": "public/index.html"
   },
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs"],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
