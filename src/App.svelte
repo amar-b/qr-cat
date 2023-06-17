@@ -14,8 +14,65 @@
 				dark:"#000000",
 				light:"#ffffff"
 			}
-		});
+		}, (err, canvas) =>!err && drawCat(canvas));
   }
+
+	function drawCat(canvas) {
+		const ctx = canvas.getContext("2d");
+		const pi = Math.PI;
+		const mid = ctx.canvas.width/2;
+		const circleDiameter = 0.2 * ctx.canvas.width
+		const catWidth = 0.7 * circleDiameter;
+		const catHeight = 0.55 * circleDiameter;
+		const leftOfFace = () => (ctx.canvas.width - catWidth)/2;
+		const rightOfFace = () => leftOfFace() + catWidth;
+		const centerOfFaceX = () => mid;
+		const centerOfFaceY = () => mid+2;
+		const eyeRadius = 0.05 * catWidth;
+  	const eyeOffsetY = 0.15 * catHeight;
+		const whiskerLength = 0.2 * catWidth;
+		
+		// background container
+		ctx.beginPath();
+		ctx.fillStyle = "white";
+		ctx.arc(mid,		mid,		circleDiameter/2,		0,		2*pi);
+		ctx.fill();
+		ctx.closePath();
+		ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.arc(mid,		mid,		circleDiameter/2,		0,		2*pi);
+		ctx.stroke();
+
+		// draw face
+		ctx.beginPath();
+		ctx.fillStyle = "black";
+		ctx.ellipse(centerOfFaceX(),	centerOfFaceY(),		catWidth/2,		catHeight/2,		0,		0,		2*Math.PI,);
+		ctx.fill();
+		
+		// left ear
+		ctx.beginPath();	
+		ctx.moveTo(leftOfFace(), centerOfFaceY());
+		ctx.quadraticCurveTo(
+			leftOfFace(),
+			(ctx.canvas.height - 2.3*catHeight)/2,
+			centerOfFaceX(),
+			centerOfFaceY()
+		);
+		ctx.fill();
+
+		// right ear
+		ctx.beginPath();
+		ctx.moveTo(rightOfFace(), centerOfFaceY());
+		ctx.quadraticCurveTo(
+			rightOfFace(),
+			(ctx.canvas.height - 2.3*catHeight)/2,
+			centerOfFaceX(),
+			centerOfFaceY()
+		);
+		ctx.fill();
+		ctx.closePath();
+	}
+
   
   onMount(() => {
 		if (typeof browser !== "undefined") {
