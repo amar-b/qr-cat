@@ -4,7 +4,7 @@
 
 	let value = '';
 
-  	function render(url) {
+	function render(url) {
 		value = url;
 		QRCode.toCanvas(document.getElementById('canvas'), url, {
 			errorCorrectionLevel: 'H',
@@ -15,7 +15,7 @@
 				light:"#ffffff"
 			}
 		}, (err, canvas) =>!err && drawCat(canvas));
-  	}
+	}
 
 	function drawCat(canvas) {
 		const ctx = canvas.getContext("2d");
@@ -71,7 +71,7 @@
 	}
 
   
-  	onMount(() => {
+	onMount(() => {
 		if (typeof browser !== "undefined") {
 			browser.tabs.query({currentWindow: true, active: true})
 				.then((tabs) => render(tabs[0].url))
@@ -80,7 +80,7 @@
 			render(window.location.href)
 		}
 		document.getElementById("url").focus();
-	});
+		});
 </script>
 
 <main>
