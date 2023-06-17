@@ -4,7 +4,7 @@
 
 	let value = '';
 
-  function render(url) {
+  	function render(url) {
 		value = url;
 		QRCode.toCanvas(document.getElementById('canvas'), url, {
 			errorCorrectionLevel: 'H',
@@ -15,7 +15,7 @@
 				light:"#ffffff"
 			}
 		}, (err, canvas) =>!err && drawCat(canvas));
-  }
+  	}
 
 	function drawCat(canvas) {
 		const ctx = canvas.getContext("2d");
@@ -28,9 +28,6 @@
 		const rightOfFace = () => leftOfFace() + catWidth;
 		const centerOfFaceX = () => mid;
 		const centerOfFaceY = () => mid+2;
-		const eyeRadius = 0.05 * catWidth;
-  	const eyeOffsetY = 0.15 * catHeight;
-		const whiskerLength = 0.2 * catWidth;
 		
 		// background container
 		ctx.beginPath();
@@ -74,7 +71,7 @@
 	}
 
   
-  onMount(() => {
+  	onMount(() => {
 		if (typeof browser !== "undefined") {
 			browser.tabs.query({currentWindow: true, active: true})
 				.then((tabs) => render(tabs[0].url))
